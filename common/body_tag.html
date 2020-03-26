@@ -24,14 +24,14 @@
               {{c.name}}
             </h3>
           </a>
+          {{#unless c.subcategories}}
+            {{category-unread category=c}}
+          {{/unless}}
         </div>
 
         {{#unless c.isMuted}}
         <div class='description'>
           {{text-overflow class="overflow" text=c.description_excerpt}}
-          {{#unless c.subcategories}}
-            {{category-unread category=c}}
-          {{/unless}}
         </div>
         {{#if c.isGrandParent}}
           {{#each c.subcategories as |subcategory|}}
@@ -57,6 +57,7 @@
           <div class='subcategories'>
             {{#each c.subcategories as |sc|}}
               <a class="subcategory" href={{sc.url}}>
+                {{category-unread category=sc}}
                 <span class="subcategory-image-placeholder">
                   {{cdn-img
                       src=sc.uploaded_logo.url
@@ -66,7 +67,6 @@
                 </span>
                 {{category-link sc hideParent="true"}}
               </a>
-              {{category-unread category=sc}}
             {{/each}}
           </div>
         {{/if}}
